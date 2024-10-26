@@ -7,7 +7,7 @@ export const userLogoutController = async (
 ) => {
   try {
     res.clearCookie(process.env?.TOKEN_COOKIE_LABEL!);
-    return res
+    res
       .status(200)
       .json({ status: true, message: "Successfull", user: null });
   } catch (error) {

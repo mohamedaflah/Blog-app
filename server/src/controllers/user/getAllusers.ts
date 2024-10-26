@@ -8,7 +8,7 @@ export const getAllusers = async (
 ) => {
   try {
     const users = await User.find({ role: "user" });
-    return res.send(200).json({ users, status: true, message: "Successful" });
+    res.send(200).json({ users, status: true, message: "Successful" });
   } catch (error) {
     next(error);
   }

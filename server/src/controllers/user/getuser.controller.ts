@@ -18,7 +18,7 @@ export const userGetController = async (
     };
     const userExist = await User.findOne({ _id: payload?.id });
 
-    return res
+    res
       .status(200)
       .json({ status: true, message: "Successful", user: userExist });
   } catch (error) {

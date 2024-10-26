@@ -12,10 +12,11 @@ export const userSignupController = async (
     const { fullname, email, designation, password, role } = req.body;
     const userExist = await User.findOne({ email });
     if (userExist) {
-      return res.status(400).json({
+      res.status(400).json({
         status: false,
         message: "User already exists with this email.",
       });
+      return;
     }
     const user = new User({
       email,
@@ -32,7 +33,7 @@ export const userSignupController = async (
       secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS in production
       sameSite: "lax", // Lax is usually safe for auth cookies
     });
-    return res.status(201).json({ status: true, message: "Successfull", user });
+    res.status(201).json({ status: true, message: "Successfull", user });
   } catch (error) {
     next(error);
   }

@@ -9,19 +9,20 @@ export const checkIsAdmin = (
   try {
     const token = req.cookies[process.env.TOKEN_COOKIE_LABEL!];
     if (!token) {
-      return res.status(400).json({ status: false, message: "Unauthorized " });
+      res.status(400).json({ status: false, message: "Unauthorized " });
+      return;
     }
     const payload = decodejwtToken(token) as {
       id: string;
       role: "user" | "admin";
     };
     if (!payload) {
-      return res.status(400).json({ status: false, message: "Unauthorized " });
+      res.status(400).json({ status: false, message: "Unauthorized " });
+      return
     }
     if (payload.role !== "admin") {
-      return res
-        .status(403)
-        .json({ status: false, message: "Not Accessible " });
+      res.status(403).json({ status: false, message: "Not Accessible " });
+      return;
     }
     next();
   } catch (error) {

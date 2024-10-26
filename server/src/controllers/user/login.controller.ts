@@ -13,17 +13,19 @@ export const userLoginController = async (
     const { email, password } = req.body;
     const userExist = await User.findOne({ email });
     if (!userExist) {
-      return res.status(404).json({
+      res.status(404).json({
         status: false,
         message: "Invalid username or password",
       });
+      return;
     }
     const passwordIsMatch = comparePassword(userExist?.password, password);
     if (!passwordIsMatch) {
-      return res.status(400).json({
+      res.status(400).json({
         status: false,
         message: "Invalid username or password",
       });
+      return;
     }
     const token = generateJWT({ id: userExist?._id, role: userExist?.role });
     res.cookie(process.env?.TOKEN_COOKIE_LABEL!, token, {
@@ -33,7 +35,7 @@ export const userLoginController = async (
       sameSite: "lax", // Lax is usually safe for auth cookies
     });
 
-    return res
+    res
       .status(200)
       .json({ status: true, message: "Successfull", user: userExist });
   } catch (error) {

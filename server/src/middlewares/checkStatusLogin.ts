@@ -2,30 +2,19 @@ import { NextFunction, Request, Response } from "express";
 import { decodejwtToken } from "../lib/decode-token";
 import User from "../models/user.model";
 
-export const checkUserStatus = async (
+export const checkUserStatusForLogin = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies[process.env.TOKEN_COOKIE_LABEL!];
-    if (!token) {
-      throw new Error("User not authenticated.");
-    }
-    const payload = decodejwtToken(token) as {
-      id: string;
-      role: "user" | "admin";
-    };
-    if (!payload) {
-      throw new Error("Payload not found");
-    }
-    const user = await User.findOne({ _id: payload.id });
+    const user = await User.findOne({ _id: req.body.email });
     if (!user?.status) {
       res.status(401).json({
         status: false,
         message: "You access has been denied by admin",
       });
-      return
+      return;
     }
     next();
   } catch (error) {
