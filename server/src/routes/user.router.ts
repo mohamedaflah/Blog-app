@@ -7,10 +7,14 @@ import { userLogoutController } from "../controllers/user/logout.controller";
 import { userGetController } from "../controllers/user/getuser.controller";
 import { checkUserStatus } from "../middlewares/checkUserStatus";
 import { checkUserStatusForLogin } from "../middlewares/checkStatusLogin";
+import { blockUserStatus } from "../controllers/user/blockUser";
 
 const userRouter = Router();
 
-userRouter.route("/").get(checkIsAdmin, getAllusers);
+userRouter
+  .route("/")
+  .get(checkIsAdmin, getAllusers)
+  .patch(checkIsAdmin, blockUserStatus);
 userRouter.post(`/login`, checkUserStatusForLogin, userLoginController);
 userRouter.post(`/signup`, userSignupController);
 userRouter.delete(`/logout`, userLogoutController);
