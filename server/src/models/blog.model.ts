@@ -9,13 +9,13 @@ export interface IBlog extends Document {
   searchKeyword: string;
   contents: { title: string; description: string }[];
   description: string;
-  likedUsers: ObjectId[];
-  viewedUsers: ObjectId[];
-  user: ObjectId;
+  likedUsers: mongoose.Types.ObjectId[];
+  viewedUsers: mongoose.Types.ObjectId[];
+  user: mongoose.Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
   category: string;
-  sharedUsers: ObjectId[];
+  sharedUsers: mongoose.Types.ObjectId[];
   publishStatus: "published" | "unpublished";
 }
 
@@ -65,13 +65,13 @@ const BlogSchema: Schema<IBlog> = new mongoose.Schema(
     },
     likedUsers: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         default: [],
       },
     ],
     viewedUsers: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         default: [],
       },
     ],
@@ -82,7 +82,7 @@ const BlogSchema: Schema<IBlog> = new mongoose.Schema(
     },
     sharedUsers: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         default: [],
       },
     ],
