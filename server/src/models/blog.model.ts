@@ -7,10 +7,11 @@ export interface IBlog extends Document {
   subImages: string[];
   subTitle: string;
   searchKeyword: string;
-  descriptions: { title: string; description: string }[];
+  contents: { title: string; description: string }[];
   description: string;
   likedUsers: ObjectId[];
   viewedUsers: ObjectId[];
+  user: ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
   category: string;
@@ -28,7 +29,7 @@ const BlogSchema: Schema<IBlog> = new mongoose.Schema(
     },
     thumbnailImage: {
       type: String,
-      required: true,
+      // required: true,
     },
     subImages: {
       type: [String],
@@ -40,10 +41,10 @@ const BlogSchema: Schema<IBlog> = new mongoose.Schema(
     },
     searchKeyword: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
     },
-    descriptions: [
+    contents: [
       {
         title: {
           type: String,
@@ -89,6 +90,9 @@ const BlogSchema: Schema<IBlog> = new mongoose.Schema(
       type: String,
       enum: ["published", "unpublished"],
       default: "unpublished",
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
     },
   },
   {

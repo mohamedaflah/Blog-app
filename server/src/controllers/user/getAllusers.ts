@@ -7,7 +7,7 @@ export const getAllusers = async (
   next: NextFunction
 ) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({ role: "user" });
     return res.send(200).json({ users, status: true, message: "Successful" });
   } catch (error) {
     next(error);
