@@ -13,9 +13,7 @@ export const createBlog = async (
     }
     const blog = new Blog(req.body);
     await blog?.save();
-    return res
-      .status(201)
-      .json({ status: true, message: "Blog saved successfully" });
+    res.status(201).json({ status: true, message: "Blog saved successfully" });
   } catch (error) {
     next(error);
   }

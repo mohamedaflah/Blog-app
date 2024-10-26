@@ -27,7 +27,7 @@ export const getAllBlogForUsers = async (
         $unwind: "$userDetail",
       },
     ]);
-    return res.status(200).json({ status: true, messages: "Success", blogs });
+    res.status(200).json({ status: true, messages: "Success", blogs });
   } catch (error) {
     next(error);
   }

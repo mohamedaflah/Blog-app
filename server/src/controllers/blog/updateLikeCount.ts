@@ -24,7 +24,7 @@ export const updateBlogLike = async (
       }
       await blog.save();
     }
-    return res.status(200).json({
+    res.status(200).json({
       status: true,
       message: "success",
       likedUsers: blog.likedUsers,

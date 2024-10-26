@@ -29,7 +29,7 @@ export const updateBlogController = async (
       sharedUsers: existingBlog?.sharedUsers,
     };
     await Blog.updateOne({ _id: blogId }, { $set: updatedData });
-    return res
+    res
       .json({ status: true, message: "Blog updated successfully" })
       .status(200);
   } catch (error) {

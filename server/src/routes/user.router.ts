@@ -19,3 +19,5 @@ userRouter.post(`/login`, checkUserStatusForLogin, userLoginController);
 userRouter.post(`/signup`, userSignupController);
 userRouter.delete(`/logout`, userLogoutController);
 userRouter.get(`/get-usr`, checkUserStatus, userGetController);
+
+export default userRouter;

@@ -9,7 +9,7 @@ export const updateBlogStatus = async (
   try {
     const { blogId, status } = req.body;
     await Blog.updateOne({ _id: blogId }, { $set: { status: status } });
-    return res.status(200).json({
+    res.status(200).json({
       status: true,
       blogStatus: status,
       blogId,

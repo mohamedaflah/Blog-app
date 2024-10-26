@@ -18,7 +18,7 @@ export const updateBlogViewCount = async (
       blog.viewedUsers.push(userIdConverted);
       await blog.save();
     }
-    return res
+     res
       .status(200)
       .json({
         status: true,
