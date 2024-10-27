@@ -13,7 +13,8 @@
     "src/**/*.ts" /* Include all TypeScript files in the 'src' directory */,
     "src/**/*.pem",
     "src/**/*.cert",
-    "src/**/*.key"
+    "src/**/*.key",
+    "src/types/type.d.ts"
   ],
   "exclude": ["node_modules" /* Exclude the 'node_modules' directory */]
 }

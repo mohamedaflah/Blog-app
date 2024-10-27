@@ -10,7 +10,10 @@ export const deleteBlogController = async (
   try {
     const { blogId, userId } = req.query;
     const token = String(req.cookies[process.env.TOKEN_COOKIE_LABEL!]);
-    const payload = decodejwtToken(token) as JWTPaylodType;
+    const payload = decodejwtToken(token) as {
+      id: string;
+      role: "user" | "admin";
+    };
     if (payload?.role !== "admin") {
       if (payload?.id !== userId) {
         throw new Error("No access to delete this blog");

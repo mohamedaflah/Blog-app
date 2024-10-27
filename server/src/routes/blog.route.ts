@@ -23,3 +23,5 @@ blogRoute.get(`/getblogs-admin`, checkIsAdmin, getAllBlogForAdmin);
 blogRoute.patch(`/update-status`, checkUserStatus, updateBlogStatus);
 blogRoute.patch(`/update-view`, checkUserStatus, updateBlogViewCount);
 blogRoute.patch(`/update-likes`, checkUserStatus, updateBlogLike);
+
+export default blogRoute

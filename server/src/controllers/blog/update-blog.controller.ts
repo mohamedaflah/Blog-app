@@ -12,7 +12,10 @@ export const updateBlogController = async (
     const { blogId, data } = req.body;
     const existingBlog = await Blog.findById(blogId);
     const token = String(req.cookies[process.env.TOKEN_COOKIE_LABEL!]);
-    const payload = decodejwtToken(token) as JWTPaylodType;
+    const payload = decodejwtToken(token) as {
+      id: string;
+      role: "user" | "admin";
+    };
     if (payload?.role !== "admin") {
       if (payload?.id !== data?.user) {
         throw new Error("No access to update this blog");
