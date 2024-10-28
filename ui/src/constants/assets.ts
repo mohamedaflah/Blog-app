@@ -10,7 +10,8 @@ import WindMill from "../app/images/windmill.png";
 import GrayHeart from "../app/icons/gray-heart.svg";
 import GrayShare from "../app/icons/gray-share.svg";
 import Thought from "../app/images/thought.png";
-import LogoImageOnly from '../app/images/Logo-img.svg'
+import LogoImageOnly from "../app/images/Logo-img.svg";
+import LoginIcons from "../app/icons/login-icon.svg";
 export {
   ArrowTopRightIcon,
   LogoImage,
@@ -23,5 +24,7 @@ export {
   WindMill,
   GrayHeart,
   GrayShare,
-  Thought,LogoImageOnly
+  Thought,
+  LogoImageOnly,
+  LoginIcons,
 };
