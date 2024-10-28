@@ -22,7 +22,7 @@ export default function Home() {
             <div className="md:w-[92%] w-[92%]  h-full mx-auto md:absolute right-0 top-0 flex flex-col">
               <div className="w-full h-full flex flex-col justify-center md:gap-8 gap-2 pr-4">
                 <div>
-                  <span className="text-[#666666] font-semibold md:text-[18px] text-sm">
+                  <span className="text-[#666666] font-semibold md:text-[18px] text-lg">
                     Your Journey to Tomorrow Begins Here
                   </span>
                 </div>
