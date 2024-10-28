@@ -1,4 +1,4 @@
-import Header from "@/components/pages-components/Header";
+
 import HomUiCard from "@/components/pages-components/ui-card";
 import {
   ArrowTopRightIcon,
@@ -16,7 +16,6 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main className="w-full">
-      <Header />
       <section className="w-full min-h-[600px] border border-borderColor grid grid-cols-1 md:grid-cols-10">
         <div className="md:col-span-6 border-r border-borderColor relative flex flex-col">
           <div className="w-full h-full relative border-b border-borderColor">
@@ -299,20 +298,38 @@ export default function Home() {
         <div className="container-width grid gird-col-1 md:grid-cols-2 ">
           <div className="min-h-96 w-full md:border-r border-borderColor py-12 flex items-center md:items-start flex-col border-b md:border-b-0">
             <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+              <Image
+                className="w-full h-80 object-cover "
+                alt=""
+                src={Thought}
+              />
             </div>
             <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+              <span className="font-kubsans-medium">
+                Mars Exploration: Unveiling Alien Landscapes
+              </span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">
+                Embark on a journey through the Red {"Planet's"} breathtaking
+                landscapes and uncover the mysteries of Mars.
+              </p>
             </div>
           </div>
           <div className="min-h-96 w-full  py-12 flex items-center md:items-end flex-col md:border-b-0">
             <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+              <Image
+                className="w-full h-80 object-cover "
+                alt=""
+                src={Thought}
+              />
             </div>
             <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+              <span className="font-kubsans-medium">
+                Mars Exploration: Unveiling Alien Landscapes
+              </span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">
+                Embark on a journey through the Red {"Planet's"} breathtaking
+                landscapes and uncover the mysteries of Mars.
+              </p>
             </div>
           </div>
         </div>
@@ -321,20 +338,38 @@ export default function Home() {
         <div className="container-width grid gird-col-1 md:grid-cols-2 ">
           <div className="min-h-96 w-full md:border-r border-borderColor border-b md:border-b-0 py-12 flex items-center md:items-start flex-col">
             <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+              <Image
+                className="w-full h-80 object-cover "
+                alt=""
+                src={Thought}
+              />
             </div>
             <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+              <span className="font-kubsans-medium">
+                Mars Exploration: Unveiling Alien Landscapes
+              </span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">
+                Embark on a journey through the Red {"Planet's"} breathtaking
+                landscapes and uncover the mysteries of Mars.
+              </p>
             </div>
           </div>
           <div className="min-h-96 w-full  py-12 flex items-center md:items-end flex-col ">
             <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+              <Image
+                className="w-full h-80 object-cover "
+                alt=""
+                src={Thought}
+              />
             </div>
             <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+              <span className="font-kubsans-medium">
+                Mars Exploration: Unveiling Alien Landscapes
+              </span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">
+                Embark on a journey through the Red {"Planet's"} breathtaking
+                landscapes and uncover the mysteries of Mars.
+              </p>
             </div>
           </div>
         </div>
