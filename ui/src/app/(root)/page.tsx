@@ -1,4 +1,3 @@
-
 import HomUiCard from "@/components/pages-components/ui-card";
 import {
   ArrowTopRightIcon,
@@ -8,6 +7,7 @@ import {
   GrayHeart,
   GrayShare,
   Latest,
+  LogoImageOnly,
   Thought,
   WindMill,
 } from "@/constants/assets";
@@ -372,6 +372,106 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="w-full bg-cardBackground md:py-16 py-4 mt-5 md:mt-0">
+        <div className="container-width flex flex-col lg:gap-12 gap-5">
+          <div className="w-full hidden md:flex gap-10 items-center min-h-28 ">
+            <div className="">
+              <Image alt="" src={LogoImageOnly} className="size-28" />
+            </div>
+            <div className="w-full flex flex-col justify-between items-start gap-6">
+              <div className="px-3 text-sm h-8 rounded-[3px] flex-center bg-grayBackground">
+                Learn, Connect, and Innovate
+              </div>
+              <div>
+                <h1 className="text-white font-semibold xl:text-5xl text-2xl lg:text-3xl md:text-3xl   leading-snug font-kubsans-medium">
+                  Be Part of the Future Tech Revolution
+                </h1>
+              </div>
+              <div>
+                <p className="text-[#7E7E81]">
+                  Immerse yourself in the world of future technology. Explore
+                  our comprehensive resources, connect with fellow tech
+                  enthusiasts, and drive innovation in the industry. Join a
+                  dynamic community of forward-thinkers.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="w-full flex flex-col gap-4 md:hidden  items-center min-h-28 ">
+            <div className="w-full flex items-center gap-4">
+              <Image alt="" src={LogoImageOnly} className="size-16" />
+              <div className="px-3 text-sm h-8 rounded-[3px] flex-center bg-grayBackground">
+                Learn, Connect, and Innovate
+              </div>
+            </div>
+            <div className="w-full flex flex-col justify-between items-start gap-6">
+              <div>
+                <h1 className="text-white font-semibold xl:text-5xl text-2xl lg:text-3xl md:text-3xl   leading-snug font-kubsans-medium">
+                  Be Part of the Future Tech Revolution
+                </h1>
+              </div>
+              <div>
+                <p className="text-[#7E7E81] text-sm">
+                  Immerse yourself in the world of future technology. Explore
+                  our comprehensive resources.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="w-full grid grid-cols-1 lg:grid-cols-3 p-4 bg-background rounded-[10px] gap-4">
+            <div className="w-full h-48 rounded-[10px]  bg-cardBackground border border-borderColor flex flex-col px-8 justify-center gap-3">
+              <div className="w-full flex justify-between">
+                <span className="font-kubsans-medium text-lg">
+                  Resource Access
+                </span>
+                <Image alt="" width={45} height={45} src={GotoBtn} />
+              </div>
+              <div className="pr-10 ">
+                <p className="text-[#98989A] text-sm">
+                  Visitors can access a wide range of resources, including
+                  ebooks, whitepapers, reports.
+                </p>
+              </div>
+            </div>
+            <div className="w-full h-48 rounded-[10px] border border-borderColor bg-cardBackground flex flex-col px-8 justify-center gap-3">
+              <div className="w-full flex justify-between">
+                <span className="font-kubsans-medium text-lg">
+                  Community Forum
+                </span>
+                <Image alt="" width={45} height={45} src={GotoBtn} />
+              </div>
+              <div className="pr-2 ">
+                <p className="text-[#98989A] text-sm">
+                  Join our active community forum to discuss industry trends,
+                  share insights, and collaborate with peers.
+                </p>
+              </div>
+            </div>
+            <div className="w-full h-48 rounded-[10px] border border-borderColor bg-cardBackground flex flex-col px-8 justify-center gap-3">
+              <div className="w-full flex justify-between">
+                <span className="font-kubsans-medium text-lg">Tech Events</span>
+                <Image alt="" width={45} height={45} src={GotoBtn} />
+              </div>
+              <div className="pr-2 ">
+                <p className="text-[#98989A] text-sm">
+                  Stay updated on upcoming tech events, webinars, and
+                  conferences to enhance your knowledge.
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* <div className="flex flex-col gap-4 items-start">
+            <div className="px-3 text-sm h-8 rounded-[3px] flex-center bg-grayBackground">
+              Featured Blog
+            </div>
+            <div>
+              <h1 className="text-white font-semibold xl:text-5xl text-2xl lg:text-3xl md:text-3xl   leading-snug font-kubsans-medium">
+                Visual Insights for the Modern Viewer
+              </h1>
+            </div>
+          </div> */}
         </div>
       </section>
     </main>
