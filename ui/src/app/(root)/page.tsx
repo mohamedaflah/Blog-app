@@ -8,6 +8,7 @@ import {
   GrayHeart,
   GrayShare,
   Latest,
+  Thought,
   WindMill,
 } from "@/constants/assets";
 import Image from "next/image";
@@ -269,7 +270,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="w-full bg-cardBackground md:py-10 py-4 mt-5 md:mt-0">
+      <section className="w-full bg-cardBackground md:py-16 py-4 mt-5 md:mt-0">
         <div className="container-width flex justify-between items-center md:flex-row flex-col">
           <div className="flex flex-col gap-4 items-start">
             <div className="px-3 text-sm h-8 rounded-[3px] flex-center bg-grayBackground">
@@ -291,6 +292,50 @@ export default function Home() {
                 alt="Arrow-top"
               />
             </button>
+          </div>
+        </div>
+      </section>
+      <section className="w-full   mt-5 md:mt-0 border-b">
+        <div className="container-width grid gird-col-1 md:grid-cols-2 ">
+          <div className="min-h-96 w-full md:border-r border-borderColor py-12 flex items-center md:items-start flex-col border-b md:border-b-0">
+            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
+              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+            </div>
+            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
+              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+            </div>
+          </div>
+          <div className="min-h-96 w-full  py-12 flex items-center md:items-end flex-col md:border-b-0">
+            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
+              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+            </div>
+            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
+              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="w-full   mt-5 md:mt-0 border-b">
+        <div className="container-width grid gird-col-1 md:grid-cols-2 ">
+          <div className="min-h-96 w-full md:border-r border-borderColor border-b md:border-b-0 py-12 flex items-center md:items-start flex-col">
+            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
+              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+            </div>
+            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
+              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+            </div>
+          </div>
+          <div className="min-h-96 w-full  py-12 flex items-center md:items-end flex-col ">
+            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
+              <Image className="w-full h-80 object-cover "  alt="" src={Thought}/>
+            </div>
+            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
+              <span className="font-kubsans-medium">Mars Exploration: Unveiling Alien Landscapes</span>
+              <p className="text-sm text-[#98989A] font-kubsans-thin">Embark on a journey through the Red {"Planet's"} breathtaking landscapes and uncover the mysteries of Mars.</p>
+            </div>
           </div>
         </div>
       </section>

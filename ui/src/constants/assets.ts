@@ -9,7 +9,7 @@ import Expert from "../app/icons/expert1.svg";
 import WindMill from "../app/images/windmill.png";
 import GrayHeart from "../app/icons/gray-heart.svg";
 import GrayShare from "../app/icons/gray-share.svg";
-
+import Thought from "../app/images/thought.png";
 export {
   ArrowTopRightIcon,
   LogoImage,
@@ -22,4 +22,5 @@ export {
   WindMill,
   GrayHeart,
   GrayShare,
+  Thought,
 };
