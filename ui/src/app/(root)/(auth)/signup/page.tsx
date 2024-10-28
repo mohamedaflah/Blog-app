@@ -31,7 +31,7 @@ export default function SignupPage() {
     console.log(values);
   };
   return (
-    <main className="w-full flex-1 flex h-screen ">
+    <main className="w-full flex-1 flex min-h-screen ">
       <section className="container-width h-full  grid grid-cols-1 lg:grid-cols-10">
         <div className="lg:col-span-4 h-full lg:border-r  border-borderColor lg:pt-14 pt-3 flex flex-col gap-5 lg:pr-16">
           <div className="w-full">

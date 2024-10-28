@@ -1,11 +1,29 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { LoginIcons } from "@/constants/assets";
+import { loginSchema } from "@/lib/schemas/login.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 export default function LoginPage() {
+  type LoginSchema = z.infer<typeof loginSchema>;
+  const {
+    register,
+    formState: { errors },
+    ...restof
+  } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
+  const handleLoginSubmission = (values: LoginSchema) => {
+    console.log(values);
+  };
   return (
     <main className="w-full flex-1 flex h-screen ">
       <section className="container-width h-full  grid grid-cols-1 lg:grid-cols-10">
@@ -23,7 +41,11 @@ export default function LoginPage() {
           </div>
         </div>
         <div className="lg:col-span-5 lg:pt-14 pt-3 lg:pl-16">
-          <form action="" className="w-full h-full flex flex-col lg:gap-10 gap-5">
+          <form
+            action=""
+            onSubmit={restof.handleSubmit(handleLoginSubmission)}
+            className="w-full h-full flex flex-col lg:gap-10 gap-5"
+          >
             <div className="flex flex-col gap-2">
               <label htmlFor="" className="text-sm font-kubsans-medium">
                 Email Address
@@ -32,7 +54,13 @@ export default function LoginPage() {
                 type="email"
                 placeholder="Enter your Email address "
                 className="text-sm h-12 w-full rounded-[5px] bg-cardBackground border-2 border-borderColor  outline-borderColor"
+                {...register("email")}
               />
+              {errors && errors?.email && (
+                <span className="text-sm text-red-500 ">
+                  {errors?.email?.message}
+                </span>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="" className="text-sm font-kubsans-medium">
@@ -42,7 +70,13 @@ export default function LoginPage() {
                 type="password"
                 placeholder="Enter your Email address "
                 className="text-sm h-12 w-full rounded-[5px] bg-cardBackground border-2  border-borderColor  outline-borderColor"
+                {...register("password")}
               />
+              {errors && errors?.password && (
+                <span className="text-sm text-red-500 ">
+                  {errors?.password?.message?.replace("String", "Password")}
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-3">
               <Checkbox className="rounded-[3px] bg-cardBackground" />
@@ -61,7 +95,13 @@ export default function LoginPage() {
               </div>
               <div className="w-full flex flex-center">
                 <span className="text-[#666666]">
-                  Don’t have an acccount yet? <Link href={'/signup'} className="text-primaryYellow font-kubsans-medium">Register Here</Link>
+                  Don’t have an acccount yet?{" "}
+                  <Link
+                    href={"/signup"}
+                    className="text-primaryYellow font-kubsans-medium"
+                  >
+                    Register Here
+                  </Link>
                 </span>
               </div>
             </div>
