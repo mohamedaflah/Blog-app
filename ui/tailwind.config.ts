@@ -74,6 +74,12 @@ const config: Config = {
         grayBackground: "#333333",
         cardBackground: "#1A1A1A",
       },
+      backgroundImage: {
+        "detail-gradient":
+          "linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.880208) 75.52%, #141414 100%)",
+        "detail-gradient-2":
+          "linear-gradient(180deg, rgba(20, 20, 20, 0) -98.48%, #141414 55.11%)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

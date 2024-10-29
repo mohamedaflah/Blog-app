@@ -12,6 +12,8 @@ import GrayShare from "../app/icons/gray-share.svg";
 import Thought from "../app/images/thought.png";
 import LogoImageOnly from "../app/images/Logo-img.svg";
 import LoginIcons from "../app/icons/login-icon.svg";
+import HospitalImage from "../app/images/hospital.png";
+import DownArrow from "../app/icons/down-arrow.svg";
 export {
   ArrowTopRightIcon,
   LogoImage,
@@ -27,4 +29,6 @@ export {
   Thought,
   LogoImageOnly,
   LoginIcons,
+  HospitalImage,
+  DownArrow,
 };
