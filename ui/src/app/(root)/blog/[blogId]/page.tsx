@@ -1,5 +1,7 @@
 "use client";
+import HomUiCard from "@/components/pages-components/ui-card";
 import {
+  ArrowTopRightIcon,
   DownArrow,
   GrayHeart,
   GrayShare,
@@ -122,8 +124,8 @@ export default function BlogDetailPage() {
                 </button>
               </div>
             </div>
-            <div className="w-full xl:px-12 px-0 xl:py-14 py-7  border-borderColor ">
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-2">
+            <div className="w-full  xl:py-14 py-7  border-borderColor ">
+              <div className="w-full xl:pl-12 pl-0 grid grid-cols-1 md:grid-cols-2 gap-x-2">
                 <div className="w-full h-24  flex flex-col gap-2">
                   <span className="text-[#98989A] font-kubsans-thin">
                     Publication Date
@@ -149,7 +151,7 @@ export default function BlogDetailPage() {
                   <span className="font-kubsans-medium">Dr. Emily Walker</span>
                 </div>
               </div>
-              <div className="lg:mt-2 mt-1">
+              <div className="lg:mt-2 mt-1 xl:pl-12 pl-0 ">
                 <div className="w-full">
                   <span className="text-[#98989A] font-kubsans-thin">
                     Table of Contents
@@ -185,6 +187,27 @@ export default function BlogDetailPage() {
             </div>
           </>
         )}
+      </section>
+      <section className="md:py-12 py-5">
+        <div className="container-width">
+          <div className="w-full flex justify-between items-center">
+            <h3 className="text-2xl font-kubsans-medium">Similar News</h3>
+            <button className="h-12  px-5 rounded-[10px] border border-borderColor bg-background flex-center gap-2">
+              <span className="text-sm text-[#98989A]">View All News</span>
+              <Image
+                src={ArrowTopRightIcon}
+                width={19}
+                height={19}
+                alt="Arrow-top"
+              />
+            </button>
+          </div>
+          <div className="md:mt-12 mt-7 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <HomUiCard />
+            <HomUiCard />
+            <HomUiCard />
+          </div>
+        </div>
       </section>
     </main>
   );
