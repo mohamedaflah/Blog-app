@@ -135,7 +135,7 @@ export default function SignupPage() {
                 <span className="text-[#666666]">
                   Already have an account?{" "}
                   <Link
-                    href={"/signup"}
+                    href={"/login"}
                     className="text-primaryYellow font-kubsans-medium"
                   >
                     Login here
