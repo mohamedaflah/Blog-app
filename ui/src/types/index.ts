@@ -10,10 +10,28 @@ export interface IUser {
 }
 
 export interface IUserStore {
-  user: IUser|null;
+  user: IUser | null;
   loading: boolean;
-  error: boolean|string;
+  error: boolean | string;
   setUser: (user: IUser) => void;
   setLoading: (loading: boolean) => void;
-  setError:(error: string) => void;
+  setError: (error: string) => void;
+}
+
+export interface IBlogPost {
+  title: string;
+  subtitle: string;
+  thumbnailImage: string;
+  subImages: string[];
+  searchKeyword: string;
+  contents: { title: string; description: string }[];
+  description: string;
+  likedUsers: string[];
+  viewedUsers: string[];
+  user: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  category: string;
+  sharedUsers: string[];
+  publishStatus: "published" | "unpublished";
 }

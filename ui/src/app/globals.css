@@ -75,4 +75,7 @@ body {
   .container-width {
     @apply w-[90%] mx-auto;
   }
+  .rounded-md1{
+    @apply rounded-[5px]
+  }
 }

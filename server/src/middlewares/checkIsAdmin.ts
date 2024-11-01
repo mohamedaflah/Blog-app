@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { decodejwtToken } from "../lib/decode-token";
 
-export const checkIsAdmin = (
+export const checkIsAdmin = async(
   req: Request,
   res: Response,
   next: NextFunction
@@ -12,7 +12,7 @@ export const checkIsAdmin = (
       res.status(400).json({ status: false, message: "Unauthorized " });
       return;
     }
-    const payload = decodejwtToken(token) as {
+    const payload =await decodejwtToken(token) as unknown as {
       id: string;
       role: "user" | "admin";
     };

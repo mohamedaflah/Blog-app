@@ -80,6 +80,7 @@ const config: Config = {
         "detail-gradient-2":
           "linear-gradient(180deg, rgba(20, 20, 20, 0) -98.48%, #141414 55.11%)",
       },
+      
     },
   },
   plugins: [require("tailwindcss-animate")],

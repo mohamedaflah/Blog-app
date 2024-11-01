@@ -1,13 +1,19 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { axiosInstance } from "@/api/api.config";
+import LoaderButton from "@/components/custom/loader-button";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { LoginIcons } from "@/constants/assets";
+import { extractErrorMessage } from "@/lib/extractError";
 import { loginSchema } from "@/lib/schemas/login.schema";
+import useUserStore from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 export default function LoginPage() {
@@ -21,8 +27,22 @@ export default function LoginPage() {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const handleLoginSubmission = (values: LoginSchema) => {
-    console.log(values);
+  const { loading, setLoading, setUser, setError } = useUserStore();
+  const router = useRouter();
+  const handleLoginSubmission = async (values: LoginSchema) => {
+    // console.log(values);
+    setLoading(true);
+    try {
+      const { data } = await axiosInstance.post(`/user/login`, values);
+      setUser(data.user);
+      toast.success("Logged in successfully!");
+      router.push("/");
+    } catch (error) {
+      setError(extractErrorMessage(error));
+      toast.error(extractErrorMessage(error));
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <main className="w-full flex-1 flex h-screen ">
@@ -86,9 +106,12 @@ export default function LoginPage() {
             </div>
             <div className="w-full flex flex-col md:gap-9 gap-4">
               <div className="w-full flex flex-center">
-                <Button className="rounded-[4px] bg-primaryYellow text-black px-5 hover:bg-primaryYellow/20">
+                <LoaderButton isLoading={loading} type="submit">
                   Log In
-                </Button>
+                </LoaderButton>
+                {/* <Button className="rounded-[4px] bg-primaryYellow text-black px-5 hover:bg-primaryYellow/20">
+                  Log In
+                </Button> */}
               </div>
               <div className="w-full flex flex-center">
                 <span className="text-[#666666]">Or</span>

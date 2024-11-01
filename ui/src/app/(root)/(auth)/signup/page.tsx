@@ -12,6 +12,7 @@ import useUserStore from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -35,7 +36,8 @@ export default function SignupPage() {
       fullname: "",
     },
   });
-  const { setLoading, setUser, setError,loading } = useUserStore();
+  const { setLoading, setUser, setError, loading } = useUserStore();
+  const router = useRouter();
 
   const handleSignupSubmission = async (values: SignupSchema) => {
     console.log(values);
@@ -51,9 +53,10 @@ export default function SignupPage() {
       const { user } = data;
       setUser(user);
       toast.success("Registration successfull");
+      router.push("/");
     } catch (error) {
       toast.error(extractErrorMessage(error));
-      setError(extractErrorMessage(error))
+      setError(extractErrorMessage(error));
     } finally {
       setLoading(false);
     }

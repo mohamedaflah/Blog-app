@@ -26,7 +26,7 @@ export const userSignupController = async (
       designation,
     });
     await user.save();
-    const token = generateJWT({ id: user?._id, role: role });
+    const token =await generateJWT({ id: user?._id, role: role });
     res.cookie(process.env?.TOKEN_COOKIE_LABEL!, token, {
       maxAge: 22 * 24 * 60 * 60 * 1000,
       httpOnly: true,

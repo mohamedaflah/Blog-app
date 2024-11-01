@@ -1,4 +1,10 @@
-import jwt from "jsonwebtoken";
-export const generateJWT = (payload: any) => {
-  return jwt.sign(payload, process.env.TOKEN_SECRET!, { expiresIn: "22d" });
+import { SignJWT } from 'jose';
+
+export const generateJWT = async (payload: any): Promise<string> => {
+  const secret = new TextEncoder().encode(process.env.TOKEN_SECRET);
+  const token = await new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setExpirationTime('22d')
+    .sign(secret);
+  return token;
 };

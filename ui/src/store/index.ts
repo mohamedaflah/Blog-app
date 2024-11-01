@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 const useUserStore = create<IUserStore>((set) => ({
   user: null,
-  setUser: (user: IUser) => set({ user: user, error: false }),
+  setUser: (user: IUser | null) => set({ user: user, error: false }),
   setLoading: (loading: boolean) =>
     set({
       loading,

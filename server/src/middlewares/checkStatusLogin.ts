@@ -8,7 +8,15 @@ export const checkUserStatusForLogin = async (
   next: NextFunction
 ) => {
   try {
-    const user = await User.findOne({ _id: req.body.email });
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      res.status(401).json({
+        status: false,
+        message: "User Not found",
+      });
+      return;
+    }
+
     if (!user?.status) {
       res.status(401).json({
         status: false,

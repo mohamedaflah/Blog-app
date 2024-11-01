@@ -54,8 +54,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${kubSansThin.variable} ${kubSansRegular.variable} ${kubSansMedium.variable} ${kubSansBold.variable} antialiased`}
       >
         <HoTToast />
-        <RectQueryWrapper>{children}</RectQueryWrapper>
-        <Toaster />
+        <RectQueryWrapper>
+          <Toaster />
+          {children}
+
+        </RectQueryWrapper>
         {/* <ThemeProvider
           attribute="class"
           defaultTheme="dark"

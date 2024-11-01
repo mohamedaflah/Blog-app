@@ -12,7 +12,7 @@ export const updateBlogController = async (
     const { blogId, data } = req.body;
     const existingBlog = await Blog.findById(blogId);
     const token = String(req.cookies[process.env.TOKEN_COOKIE_LABEL!]);
-    const payload = decodejwtToken(token) as {
+    const payload = decodejwtToken(token) as unknown as {
       id: string;
       role: "user" | "admin";
     };

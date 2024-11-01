@@ -14,6 +14,7 @@ import LogoImageOnly from "../app/images/Logo-img.svg";
 import LoginIcons from "../app/icons/login-icon.svg";
 import HospitalImage from "../app/images/hospital.png";
 import DownArrow from "../app/icons/down-arrow.svg";
+import UploadTo from '../app/images/upload-img.svg'
 export {
   ArrowTopRightIcon,
   LogoImage,
@@ -30,5 +31,5 @@ export {
   LogoImageOnly,
   LoginIcons,
   HospitalImage,
-  DownArrow,
+  DownArrow,UploadTo
 };

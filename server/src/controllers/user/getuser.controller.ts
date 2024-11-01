@@ -12,7 +12,7 @@ export const userGetController = async (
 ) => {
   try {
     const token = req.cookies[process.env.TOKEN_COOKIE_LABEL!];
-    const payload = decodejwtToken(token) as {
+    const payload = (await decodejwtToken(token)) as unknown as {
       id: string;
       role: "admin" | "user";
     };

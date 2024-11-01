@@ -10,7 +10,7 @@ export const deleteBlogController = async (
   try {
     const { blogId, userId } = req.query;
     const token = String(req.cookies[process.env.TOKEN_COOKIE_LABEL!]);
-    const payload = decodejwtToken(token) as {
+    const payload = decodejwtToken(token) as unknown as {
       id: string;
       role: "user" | "admin";
     };

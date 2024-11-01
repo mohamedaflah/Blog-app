@@ -11,7 +11,10 @@ export const userLoginController = async (
 ) => {
   try {
     const { email, password } = req.body;
-    const userExist = await User.findOne({ email });
+   
+    
+    const userExist = await User.findOne({ email: email });
+  
     if (!userExist) {
       res.status(404).json({
         status: false,
@@ -27,7 +30,8 @@ export const userLoginController = async (
       });
       return;
     }
-    const token = generateJWT({ id: userExist?._id, role: userExist?.role });
+    const token =await generateJWT({ id: userExist?._id, role: userExist?.role });
+    console.log("🚀 ~ token:", token)
     res.cookie(process.env?.TOKEN_COOKIE_LABEL!, token, {
       maxAge: 22 * 24 * 60 * 60 * 1000,
       httpOnly: true,
