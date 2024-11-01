@@ -1,5 +1,5 @@
 export interface IUser {
-  _id?:string
+  _id?: string;
   fullname: string;
   email: string;
   designation: string;
@@ -20,7 +20,7 @@ export interface IUserStore {
 }
 
 export interface IBlogPost {
-  _id?:string
+  _id?: string;
   title: string;
   subTitle: string;
   thumbnailImage: string;
@@ -31,6 +31,7 @@ export interface IBlogPost {
   likedUsers: string[];
   viewedUsers: string[];
   user: string;
+  userDetail: IUser;
   createdAt?: Date;
   updatedAt?: Date;
   category: string;

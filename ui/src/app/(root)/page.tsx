@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+"use client";
 import HomUiCard from "@/components/pages-components/ui-card";
 import {
   ArrowTopRightIcon,
@@ -11,9 +13,13 @@ import {
   Thought,
   WindMill,
 } from "@/constants/assets";
+import useGetAllBlogsUserSide from "@/hooks/useGetAllBlogsUserSide";
+import { format } from "date-fns";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+  const { data: blogs } = useGetAllBlogsUserSide();
   return (
     <main className="w-full">
       <section className="w-full min-h-[600px] border border-borderColor grid grid-cols-1 md:grid-cols-10">
@@ -71,7 +77,11 @@ export default function Home() {
           <div
             className={`w-full h-full relative flex flex-row  items-end mt-2 md:mt-0 border-t md:border-none   `}
           >
-            <Image className="w-[100%] h-[100%] absolute left-0 top-0 hidden" alt="" src={LightFlash}/>
+            <Image
+              className="w-[100%] h-[100%] absolute left-0 top-0 hidden"
+              alt=""
+              src={LightFlash}
+            />
             <div className="w-full min-h-64  flex flex-col px-12 md:px-20 gap-4 z-10 ">
               <div className="flex min-h-16 p-2 w-56 border rounded-full items-center justify-between">
                 <div className="size-14 border-2 rounded-full bg-grayBackground"></div>
@@ -202,37 +212,38 @@ export default function Home() {
         <div className="container-width">
           <div className="w-full min-h-60 grid md:grid-cols-10 grid-cols-1 md:gap-12 gap-2">
             <div className="lg:col-span-3 md:col-span-4 md:min-h-60 min-h-52 overflow-hidden">
-              <Image
+              <img
                 alt=""
-                className="w-full h-full object-cover rounded-md"
-                src={WindMill}
+                className="w-full h-full object-cover rounded-[5px]"
+                src={blogs?.[0]?.thumbnailImage}
               />
             </div>
             <div className="lg:col-span-7 md:col-span-6 flex flex-col items-start justify-center gap-8">
               <div>
                 <h1 className="text-2xl font-kubsans-medium">
-                  Global Climate Summit Addresses Urgent Climate Action
+                  {blogs?.[0]?.title}
                 </h1>
               </div>
               <div>
-                <p className="text-[#98989A]">
-                  World leaders gathered at the Global Climate Summit to discuss
-                  urgent climate action, emissions reductions, and renewable
-                  energy targets.
+                <p className="text-[#98989A] line-clamp-3">
+                  {blogs?.[0]?.description}
                 </p>
               </div>
               <div className="flex gap-2 md:gap-8">
                 <div className="flex flex-col gap-1">
                   <h4 className="text-[#98989A]">Category</h4>
-                  <h4 className="text-white">Environment</h4>
+                  <h4 className="text-white">{blogs?.[0]?.category}</h4>
                 </div>
                 <div className="flex flex-col gap-1">
                   <h4 className="text-[#98989A]">Publication Date</h4>
-                  <h4 className="text-white">October 10, 2023</h4>
+                  <h4 className="text-white">
+                    {blogs?.[0]?.createdAt &&
+                      format(blogs?.[0]?.createdAt, "PPP")}
+                  </h4>
                 </div>
                 <div className="flex flex-col gap-1">
                   <h4 className="text-[#98989A]">Author</h4>
-                  <h4 className="text-white">Jane Smith</h4>
+                  <h4 className="text-white">{blogs?.[0]?.userDetail?.fullname}</h4>
                 </div>
               </div>
               <div className="w-full flex justify-between items-center">
@@ -246,9 +257,9 @@ export default function Home() {
                     <h4 className="text-[#98989A]">204</h4>
                   </button>
                 </div>
-                <button className="px-4 h-14 rounded-[10px] border border-borderColor flex-center ">
+                <Link href={`/blog/${blogs?.[0]?._id}`} className="px-4 h-14 rounded-[10px] border border-borderColor flex-center ">
                   <span className="text-[#98989A]">Read more</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

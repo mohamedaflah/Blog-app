@@ -12,7 +12,7 @@ export const getAllBlogForUsers = async (
     const blogs = await Blog.aggregate([
       {
         $match: {
-          status: "published",
+          publishStatus: "published",
         },
       },
       {
@@ -22,6 +22,9 @@ export const getAllBlogForUsers = async (
           foreignField: "_id",
           as: "userDetail",
         },
+      },
+      {
+        $sort: { createdAt: -1 },
       },
       {
         $unwind: "$userDetail",

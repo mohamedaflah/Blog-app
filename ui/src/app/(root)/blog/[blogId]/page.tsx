@@ -7,24 +7,29 @@ import {
   GrayShare,
   HospitalImage,
 } from "@/constants/assets";
+import { useGetBlogById } from "@/hooks/useGetOneBlogById";
 import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
 export default function BlogDetailPage() {
   const [viewAll, setViewAll] = useState<boolean>(false);
+  const { blogId } = useParams<{ blogId: string }>();
+  const { data: blogDetail } = useGetBlogById(blogId!);
   return (
     <main className="w-full h-ful">
       <section className="w-full h-full">
         <div className="w-full lg:h-[530px] md:h-[450px] sm:h-[300px] h-[280px]   relative overflow-hidden">
-          <Image
+          <img
             className="w-full h-full object-cover"
-            src={HospitalImage}
+            src={blogDetail?.thumbnailImage}
             alt=""
           />
-          <div className="absolute left-0 bottom-0 lg:h-40 md:h-32 sm:h-24 h-20  w-full bg-detail-gradient flex justify-center items-center">
-            <h1 className="text-white font-semibold xl:text-5xl text-2xl lg:text-3xl md:text-3xl   leading-snug font-kubsans-medium text-center">
-              The Rise of Artificial Intelligence in Healthcare
+          <div className="absolute left-0 bottom-0 lg:h-40 md:h-32 sm:h-24 h-20  w-full bg-detail-gradient flex justify-center items-center px-10 ">
+            <h1 className="text-white font-semibold xl:text-5xl text-2xl lg:text-3xl md:text-3xl line-clamp-1  leading-snug font-kubsans-medium text-center">
+              {blogDetail?.title}
             </h1>
           </div>
         </div>
@@ -43,80 +48,39 @@ export default function BlogDetailPage() {
                 <h4 className="font-kubsans-medium text-lg">Introduction</h4>
               </div>
               <div>
-                <p className="text-[#98989A]">
-                  Artificial Intelligence (AI) has emerged as a transformative
-                  force in the healthcare industry, reshaping patient care,
-                  diagnostics, and research. In this blog post, we explore the
-                  profound impact of AI in healthcare, from revolutionizing
-                  diagnostic accuracy to enhancing patient outcomes.
-                </p>
+                <p className="text-[#98989A]">{blogDetail?.description}</p>
               </div>
             </div>
-            <div className="flex flex-col gap-3 py-12 lg:pr-9">
-              <div className="w-full">
-                <h4 className="font-kubsans-medium text-2xl">
-                  Artificial Intelligence (AI)
-                </h4>
+            {blogDetail?.contents?.map((item,i) => (
+              <div key={i} className="flex flex-col gap-3 py-12 lg:pr-9">
+                <div className="w-full">
+                  <h4 className="font-kubsans-medium text-2xl">
+                    {item.title}
+                  </h4>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-[#98989A]">
+                  {item.description}
+                  </p>
+                
+                </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-[#98989A]">
-                  Artificial Intelligence (AI) has permeated virtually every
-                  aspect of our lives, and healthcare is no exception. The
-                  integration of AI in healthcare is ushering in a new era of
-                  medical practice, where machines complement the capabilities
-                  of healthcare professionals, ultimately improving patient
-                  outcomes and the efficiency of the healthcare system. In this
-                  blog post, we will delve into the diverse applications of AI
-                  in healthcare, from diagnostic imaging to personalized
-                  treatment plans, and address the ethical considerations
-                  surrounding this revolutionary technology.
-                </p>
-                <p className="text-[#98989A]">
-                  Artificial Intelligence (AI) has permeated virtually every
-                  aspect of our lives, and healthcare is no exception. The
-                  integration of AI in healthcare is ushering in a new era of
-                  medical practice, where machines complement the capabilities
-                  of healthcare professionals, ultimately improving patient
-                  outcomes and the efficiency of the healthcare system. In this
-                  blog post, we will delve into the diverse applications of AI
-                  in healthcare, from diagnostic imaging to personalized
-                  treatment plans, and address the ethical considerations
-                  surrounding this revolutionary technology.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 py-12 lg:pr-9">
-              <div className="w-full">
-                <h4 className="font-kubsans-medium text-2xl">
-                  Predictive Analytics and Disease Prevention
-                </h4>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-[#98989A]">
-                  Artificial Intelligence (AI) has permeated virtually every
-                  aspect of our lives, and healthcare is no exception. The
-                  integration of AI in healthcare is ushering in a new era of
-                  medical practice, where machines complement the capabilities
-                  of healthcare professionals, ultimately improving patient
-                  outcomes and the efficiency of the healthcare system. In this
-                  blog post, we will delve into the diverse applications of AI
-                  in healthcare, from diagnostic imaging to personalized
-                  treatment plans, and address the ethical considerations
-                  surrounding this revolutionary technology.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="lg:col-span-3">
             <div className="w-full xl:px-12 px-0 xl:py-14 py-7 border-b border-borderColor ">
               <div className="flex gap-3">
                 <button className="px-4 bg-transparent h-12 flex justify-center items-center gap-2 border border-borderColor rounded-full">
                   <Image alt="" src={GrayHeart} width={20} height={20} />
-                  <h4 className="text-[#98989A]">14K</h4>
+                  <h4 className="text-[#98989A]">
+                    {blogDetail?.likedUsers?.length}
+                  </h4>
                 </button>
                 <button className="px-4 bg-transparent h-12 flex justify-center items-center gap-2 border border-borderColor rounded-full">
                   <Image alt="" src={GrayShare} width={20} height={20} />
-                  <h4 className="text-[#98989A]">204</h4>
+                  <h4 className="text-[#98989A]">
+                    {blogDetail?.sharedUsers?.length}
+                  </h4>
                 </button>
                 <button className="px-4 bg-transparent h-12 flex justify-center items-center gap-2 border border-borderColor rounded-full">
                   <Image alt="" src={GrayShare} width={20} height={20} />
@@ -130,13 +94,18 @@ export default function BlogDetailPage() {
                   <span className="text-[#98989A] font-kubsans-thin">
                     Publication Date
                   </span>
-                  <span className="font-kubsans-medium">October 15, 2023</span>
+                  <span className="font-kubsans-medium">
+                    {blogDetail?.createdAt &&
+                      format(blogDetail?.createdAt, "PPP")}
+                  </span>
                 </div>
                 <div className="w-full h-24  flex flex-col gap-2">
                   <span className="text-[#98989A] font-kubsans-thin">
                     Category
                   </span>
-                  <span className="font-kubsans-medium">Healthcare</span>
+                  <span className="font-kubsans-medium">
+                    {blogDetail?.category}
+                  </span>
                 </div>
                 <div className="w-full h-24  flex flex-col gap-2">
                   <span className="text-[#98989A] font-kubsans-thin">
@@ -148,7 +117,9 @@ export default function BlogDetailPage() {
                   <span className="text-[#98989A] font-kubsans-thin">
                     Author Name
                   </span>
-                  <span className="font-kubsans-medium">Dr. Emily Walker</span>
+                  <span className="font-kubsans-medium">
+                    {blogDetail?.userDetail?.fullname}
+                  </span>
                 </div>
               </div>
               <div className="lg:mt-2 mt-1 xl:pl-12 pl-0 ">
@@ -159,15 +130,17 @@ export default function BlogDetailPage() {
                 </div>
                 <div className="p-5 rounded-[9px] bg-cardBackground mt-3 flex flex-col">
                   <ul className="list-disc ml-4 font-kubsans-thin text-sm flex flex-col gap-3">
-                    <li>Introduction</li>
-                    <li>AI in Diagnostic Imaging</li>
+                    {blogDetail?.contents?.map((item, I) => (
+                      <li key={I + JSON.stringify(item)}>{item.title}</li>
+                    ))}
+                    {/* <li>AI in Diagnostic Imaging</li>
                     <li>Predictive Analytics and Disease Prevention</li>
                     <li>Personalized Treatment Plans</li>
                     <li>Drug Discovery and Research</li>
                     <li>AI in Telemedicine</li>
                     <li>Ethical Considerations</li>
                     <li>The Future of AI in Healthcare</li>
-                    <li>Conclusion</li>
+                    <li>Conclusion</li> */}
                   </ul>
                 </div>
               </div>

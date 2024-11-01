@@ -1,4 +1,16 @@
 "use client";
+import { axiosInstance } from "@/api/api.config";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   Select,
   SelectContent,
@@ -7,20 +19,32 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { HospitalImage } from "@/constants/assets";
+
 import useGetUserBlogs from "@/hooks/useGetUserBlogs";
 import useUserStore from "@/store";
+import { InvalidateQueryFilters, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { Edit, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import { useState } from "react";
+import { toast } from "sonner";
 export default function MyAccount() {
   const { user } = useUserStore();
   const [blogType, setBlogType] = useState<"all" | "published" | "unpublished">(
     "all"
   );
   const { data: blogs } = useGetUserBlogs(blogType);
+  const queryClient = useQueryClient();
+  const handleDeleteBlog = async (id: string) => {
+    // blogId, userId
+    await axiosInstance.delete(`/blogs/blogId=${id}&userId=${user?._id}`);
+    toast.success("Blog deleted successfully");
+    queryClient.invalidateQueries([
+      "my-blog",
+      blogType,
+    ] as InvalidateQueryFilters);
+  };
   return (
     <main className="py-8 scrollbar-thin">
       <section className="container-width ">
@@ -98,13 +122,39 @@ export default function MyAccount() {
                       </p>
                     </div>
                     <div className="w-full flex items-center justify-between mt-3">
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          className=" bg-red-600 rounded-[5px] flex-center size-7"
-                        >
-                          <Trash2 className="w-4" />
-                        </button>
+                      <div className="flex gap-2 items-center">
+                        <AlertDialog>
+                          <AlertDialogTrigger>
+                            {" "}
+                            <button
+                              type="button"
+                              className=" bg-red-600 rounded-[5px] flex-center size-7"
+                            >
+                              <Trash2 className="w-4" />
+                            </button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                Are you absolutely sure?
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will
+                                permanently delete your account and remove your
+                                data from our servers.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => handleDeleteBlog(blog?._id!)}
+                              >
+                                Continue
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+
                         <Link
                           href={`/edit-blog/${blog?._id}`}
                           type="button"
@@ -123,9 +173,12 @@ export default function MyAccount() {
                         </Select>
                       </div>
                       <div className="">
-                        <button className="px-3 h-9 border border-borderColor text-sm bg-background  rounded-[2px]">
+                        <Link
+                          href={`/blog/${blog?._id}`}
+                          className="px-3 h-10 py-2 border border-borderColor text-sm bg-background  rounded-[2px]"
+                        >
                           View details
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
