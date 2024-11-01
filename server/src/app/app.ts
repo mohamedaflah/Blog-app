@@ -9,13 +9,13 @@ import userRouter from "../routes/user.router";
 import blogRoute from "../routes/blog.route";
 const app: Application = express();
 
+app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
-app.use(express.json());
 
 app.use(cookieParser());
 
@@ -23,5 +23,5 @@ app.use(`/api/user`, userRouter);
 app.use(`/api/blogs`, blogRoute);
 app.use(errorHandler);
 app.listen(process.env.PORT!, () => {
-  console.log("Server started");
+  console.log("Server started", process.env.PORT!);
 });

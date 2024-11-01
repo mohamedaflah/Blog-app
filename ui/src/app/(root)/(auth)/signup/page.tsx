@@ -1,15 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { Button } from "@/components/ui/button";
+import { axiosInstance } from "@/api/api.config";
+import LoaderButton from "@/components/custom/loader-button";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { LoginIcons } from "@/constants/assets";
+import { extractErrorMessage } from "@/lib/extractError";
 import { signupSchema } from "@/lib/schemas/signup.schema";
+import useUserStore from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+// import { toast } from "sonner";
+import { z } from "zod";
+// /user/signup
 export default function SignupPage() {
   type SignupSchema = z.infer<typeof signupSchema>;
   const {
@@ -27,8 +35,28 @@ export default function SignupPage() {
       fullname: "",
     },
   });
-  const handleSignupSubmission = (values: SignupSchema) => {
+  const { setLoading, setUser, setError,loading } = useUserStore();
+
+  const handleSignupSubmission = async (values: SignupSchema) => {
     console.log(values);
+    setLoading(true);
+    try {
+      // fullname, email, designation, password, role
+      // { status: true, message: "Successfull", user }
+      // /signup
+      const { data } = await axiosInstance.post(`/user/signup`, {
+        ...values,
+        role: "user",
+      });
+      const { user } = data;
+      setUser(user);
+      toast.success("Registration successfull");
+    } catch (error) {
+      toast.error(extractErrorMessage(error));
+      setError(extractErrorMessage(error))
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <main className="w-full flex-1 flex min-h-screen ">
@@ -124,9 +152,12 @@ export default function SignupPage() {
             </div>
             <div className="w-full flex flex-col md:gap-5  gap-4">
               <div className="w-full flex flex-center">
-                <Button className="rounded-[4px] bg-primaryYellow text-black px-5 hover:bg-primaryYellow/20">
+                <LoaderButton isLoading={loading} type="submit">
+                  Sign up
+                </LoaderButton>
+                {/* <Button className="rounded-[4px] bg-primaryYellow text-black px-5 hover:bg-primaryYellow/20">
                   Sign Up
-                </Button>
+                </Button> */}
               </div>
               <div className="w-full flex flex-center">
                 <span className="text-[#666666]">Or</span>

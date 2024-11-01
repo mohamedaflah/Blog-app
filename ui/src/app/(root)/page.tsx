@@ -7,6 +7,7 @@ import {
   GrayHeart,
   GrayShare,
   Latest,
+  LightFlash,
   Thought,
   WindMill,
 } from "@/constants/assets";
@@ -67,8 +68,11 @@ export default function Home() {
           </div>
         </div>
         <div className="md:col-span-4 h-full">
-          <div className="w-full h-full relative flex flex-row items-end mt-2 md:mt-0 border-t md:border-none">
-            <div className="w-full min-h-64  flex flex-col px-12 md:px-20 gap-4 ">
+          <div
+            className={`w-full h-full relative flex flex-row  items-end mt-2 md:mt-0 border-t md:border-none   `}
+          >
+            <Image className="w-[100%] h-[100%] absolute left-0 top-0 hidden" alt="" src={LightFlash}/>
+            <div className="w-full min-h-64  flex flex-col px-12 md:px-20 gap-4 z-10 ">
               <div className="flex min-h-16 p-2 w-56 border rounded-full items-center justify-between">
                 <div className="size-14 border-2 rounded-full bg-grayBackground"></div>
                 <div className="size-14 border-2 rounded-full -ml-2 bg-grayBackground"></div>

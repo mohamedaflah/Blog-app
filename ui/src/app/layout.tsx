@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import RectQueryWrapper from "@/wrappers/react-query-wrapper";
+import { Toaster } from "@/components/ui/sonner";
+import { Toaster as HoTToast } from "react-hot-toast";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -50,7 +53,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${kubSansThin.variable} ${kubSansRegular.variable} ${kubSansMedium.variable} ${kubSansBold.variable} antialiased`}
       >
-        {children}
+        <HoTToast />
+        <RectQueryWrapper>{children}</RectQueryWrapper>
+        <Toaster />
         {/* <ThemeProvider
           attribute="class"
           defaultTheme="dark"
