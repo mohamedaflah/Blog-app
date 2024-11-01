@@ -19,7 +19,7 @@ import { toast } from "sonner";
 export default function Header() {
   const router = useRouter();
 
-  const { user, setUser } = useUserStore();
+  const { user, loading, setUser } = useUserStore();
   const handleLogout = async () => {
     await axiosInstance.delete("/user/logout");
     setUser(null as unknown as IUser);
@@ -76,23 +76,33 @@ export default function Header() {
                     >
                       Create Blog
                     </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="my-1 cursor-pointer"
+                      onClick={() => router.push("/my-account")}
+                    >
+                      Manage My Account
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
             ) : (
               <>
-                <Button
-                  className="bg-transparent border-2 rounded-[3px] border-borderColor text-white hover:bg-transparent"
-                  onClick={() => router.push("/login")}
-                >
-                  Login
-                </Button>
-                <Button
-                  className="bg-primaryYellow rounded-[3px]"
-                  onClick={() => router.push("/signup")}
-                >
-                  Signup
-                </Button>
+                {!loading && (
+                  <>
+                    <Button
+                      className="bg-transparent border-2 rounded-[3px] border-borderColor text-white hover:bg-transparent"
+                      onClick={() => router.push("/login")}
+                    >
+                      Login
+                    </Button>
+                    <Button
+                      className="bg-primaryYellow rounded-[3px]"
+                      onClick={() => router.push("/signup")}
+                    >
+                      Signup
+                    </Button>
+                  </>
+                )}
               </>
             )}
           </div>

@@ -9,14 +9,18 @@ import { toast } from "sonner";
 
 export default function RectQueryWrapper({ children }: PropsWithChildren) {
   const queryClient = new QueryClient();
-  const { setUser } = useUserStore();
+  const { setUser, setLoading } = useUserStore();
   useEffect(() => {
-    
-    axiosInstance.get(`/user/get-usr`).then(({ data }) => {
-      setUser(data?.user);
-    }).catch((er:AxiosError)=>{
-      toast.error(er.message)
-    });
+    setLoading(true);
+    axiosInstance
+      .get(`/user/get-usr`)
+      .then(({ data }) => {
+        setUser(data?.user);
+      })
+      .catch((er: AxiosError) => {
+        toast.error(er.message);
+      })
+      .finally(() => setLoading(false));
   }, [setUser]);
   return (
     <>

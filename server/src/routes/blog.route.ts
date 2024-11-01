@@ -9,6 +9,8 @@ import { updateBlogStatus } from "../controllers/blog/update-status.controller";
 import { getAllBlogForUsers } from "../controllers/blog/getAllBlogsForeUsers";
 import { checkIsAdmin } from "../middlewares/checkIsAdmin";
 import { getAllBlogForAdmin } from "../controllers/blog/getAllBlogforAdmin";
+import { getBlogByUser } from "../controllers/blog/getblogbyuser.controller";
+import { getBlogById } from "../controllers/blog/getblogbyid";
 
 const blogRoute = Router();
 
@@ -23,5 +25,7 @@ blogRoute.get(`/getblogs-admin`, checkIsAdmin, getAllBlogForAdmin);
 blogRoute.patch(`/update-status`, checkUserStatus, updateBlogStatus);
 blogRoute.patch(`/update-view`, checkUserStatus, updateBlogViewCount);
 blogRoute.patch(`/update-likes`, checkUserStatus, updateBlogLike);
+blogRoute.get(`/get-myblog`, checkUserStatus, getBlogByUser);
+blogRoute.get(`/get-blogbyid/:id`, getBlogById);
 
-export default blogRoute
+export default blogRoute;

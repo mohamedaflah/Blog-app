@@ -1,3 +1,4 @@
+// /get-blogbyid/:id
 "use client";
 import { axiosInstance } from "@/api/api.config";
 import FormErrorBorder from "@/components/custom/form-error-border";
@@ -15,6 +16,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { UploadTo } from "@/constants/assets";
 import { blogCategories } from "@/constants/categories";
+import { useGetBlogById } from "@/hooks/useGetOneBlogById";
 import { extractErrorMessage } from "@/lib/extractError";
 import { blogSchema } from "@/lib/schemas/blog.schema";
 import { uploadImageToCloudinary } from "@/lib/uploadImag";
@@ -22,14 +24,17 @@ import useUserStore from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { string, z } from "zod";
 
-export default function CreateBlogPost() {
+export default function EditBlog() {
+  const { id } = useParams<{ id: string }>();
+  const { data: blogDetails } = useGetBlogById(id!);
   const [loading, setLoading] = useState(false);
+
   type blogSchema = z.infer<typeof blogSchema>;
   const {
     register,
@@ -81,15 +86,32 @@ export default function CreateBlogPost() {
         }
       }
       values.subImages = subImages as any;
-      await axiosInstance.post(`/blogs/`, { ...values, user: user?._id + "" });
-      toast.success("Blog post created successfully");
-      router.push("/");
+      // blogId, data
+      await axiosInstance.put(`/blogs/`, {
+        data: { ...values, user: user?._id + "" },
+        blogId: id,
+      });
+      toast.success("Blog post updated successfully");
+      router.push("/my-account");
     } catch (error) {
       return toast.error(extractErrorMessage(error));
     } finally {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (blogDetails) {
+      rest.setValue("title", blogDetails.title);
+      rest.setValue("subImages", blogDetails.subImages as any);
+      rest.setValue("category", blogDetails.category);
+      rest.setValue("contents", blogDetails.contents as any);
+      rest.setValue("description", blogDetails.description);
+      rest.setValue("publishStatus", blogDetails.publishStatus);
+      rest.setValue("searchKeyword", blogDetails.searchKeyword);
+      rest.setValue("thumbnailImage", blogDetails.thumbnailImage);
+      rest.setValue("subTitle", blogDetails?.subTitle);
+    }
+  }, [blogDetails]);
   console.log(errors);
 
   return (
@@ -104,9 +126,7 @@ export default function CreateBlogPost() {
       >
         <section className="h-full w-full ">
           <div className="w-full">
-            <h3 className="font-kubsans-medium text-2xl">
-              Create new Blog post
-            </h3>
+            <h3 className="font-kubsans-medium text-2xl">Update Blog post</h3>
           </div>
           <section className="w-full mt-4 p-5 border border-borderColor rounded-[3px] bg-cardBackground space-y-5">
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -273,7 +293,7 @@ export default function CreateBlogPost() {
                       }}
                     >
                       <SelectTrigger className="w-full bg-background rounded-[5px]">
-                        <SelectValue placeholder="Select category" />
+                        <SelectValue placeholder={rest.watch("category")} />
                       </SelectTrigger>
                       <SelectContent>
                         {blogCategories.map((cat, I) => (
@@ -297,7 +317,7 @@ export default function CreateBlogPost() {
                       }}
                     >
                       <SelectTrigger className="w-full bg-background rounded-[5px]">
-                        <SelectValue placeholder="Select publish status" />
+                        <SelectValue placeholder={rest.watch("publishStatus")} />
                       </SelectTrigger>
                       <SelectContent>
                         {["published", "unpublished"].map((cat, I) => (

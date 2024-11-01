@@ -8,16 +8,17 @@ export const getBlogByUser = async (
   next: NextFunction
 ) => {
   try {
+    
     const token = req.cookies[process.env.TOKEN_COOKIE_LABEL!];
     if (!token) {
       throw new Error("No token found");
     }
-    const payload = decodejwtToken(token) as JWTPaylodType;
+    const payload = await decodejwtToken(token);
     if (!payload) {
       throw new Error("Payload not found");
     }
     const blogs = await Blog.find({ user: payload?.id });
-    return res.status(200).json({ status: true, messages: "Success", blogs });
+    res.status(200).json({ status: true, messages: "Success", blogs });
   } catch (error) {
     next(error);
   }

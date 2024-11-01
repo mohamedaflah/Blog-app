@@ -1,4 +1,5 @@
 export interface IUser {
+  _id?:string
   fullname: string;
   email: string;
   designation: string;
@@ -19,8 +20,9 @@ export interface IUserStore {
 }
 
 export interface IBlogPost {
+  _id?:string
   title: string;
-  subtitle: string;
+  subTitle: string;
   thumbnailImage: string;
   subImages: string[];
   searchKeyword: string;
