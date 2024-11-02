@@ -12,10 +12,15 @@ export default function RectQueryWrapper({ children }: PropsWithChildren) {
   const { setUser, setLoading } = useUserStore();
   useEffect(() => {
     setLoading(true);
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")!));
+    }
     axiosInstance
       .get(`/user/get-usr`)
       .then(({ data }) => {
         setUser(data?.user);
+        delete data.user?.password;
+        localStorage.setItem("user", JSON.stringify(data?.user));
       })
       .catch((er: AxiosError) => {
         toast.error(er.message);

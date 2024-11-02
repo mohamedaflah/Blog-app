@@ -53,7 +53,11 @@ export default function SignupPage() {
       const { user } = data;
       setUser(user);
       toast.success("Registration successfull");
-      router.push("/");
+      if (user.role == "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/");
+      }
     } catch (error) {
       toast.error(extractErrorMessage(error));
       setError(extractErrorMessage(error));

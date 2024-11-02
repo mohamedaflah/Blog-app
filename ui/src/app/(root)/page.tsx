@@ -11,7 +11,6 @@ import {
   Latest,
   LightFlash,
   Thought,
-  WindMill,
 } from "@/constants/assets";
 import useGetAllBlogsUserSide from "@/hooks/useGetAllBlogsUserSide";
 import { format } from "date-fns";
@@ -243,7 +242,9 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col gap-1">
                   <h4 className="text-[#98989A]">Author</h4>
-                  <h4 className="text-white">{blogs?.[0]?.userDetail?.fullname}</h4>
+                  <h4 className="text-white">
+                    {blogs?.[0]?.userDetail?.fullname}
+                  </h4>
                 </div>
               </div>
               <div className="w-full flex justify-between items-center">
@@ -257,7 +258,10 @@ export default function Home() {
                     <h4 className="text-[#98989A]">204</h4>
                   </button>
                 </div>
-                <Link href={`/blog/${blogs?.[0]?._id}`} className="px-4 h-14 rounded-[10px] border border-borderColor flex-center ">
+                <Link
+                  href={`/blog/${blogs?.[0]?._id}`}
+                  className="px-4 h-14 rounded-[10px] border border-borderColor flex-center "
+                >
                   <span className="text-[#98989A]">Read more</span>
                 </Link>
               </div>

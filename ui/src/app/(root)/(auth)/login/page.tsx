@@ -36,7 +36,11 @@ export default function LoginPage() {
       const { data } = await axiosInstance.post(`/user/login`, values);
       setUser(data.user);
       toast.success("Logged in successfully!");
-      router.push("/");
+      if (data.user.role == "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/");
+      }
     } catch (error) {
       setError(extractErrorMessage(error));
       toast.error(extractErrorMessage(error));

@@ -10,7 +10,7 @@ export const blockUserStatus = async (
     const { userId, status } = req.body;
 
     await User.updateOne({ _id: userId }, { $set: { status: status } });
-    res.send(200).json({ status: status, message: "Successful", userId });
+    res.status(200).json({ status: status, message: "Successful", userId });
   } catch (error) {
     next(error);
   }
