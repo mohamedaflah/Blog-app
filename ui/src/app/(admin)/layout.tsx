@@ -19,12 +19,12 @@ export default function AdminLayout({children}:PropsWithChildren) {
             >
               <Users className="w-5" /> <span>Users</span>
             </Link>
-            <Link
+            {/* <Link
               href={"/admin/blogs"}
               className="w-full h-10 text-sm flex items-center gap-2  rounded-[3px] px-3 bg-grayBackground"
             >
               <BookUser className="w-5" /> <span>Blogs</span>
-            </Link>
+            </Link> */}
           </div>
         </aside>
         <main className="w-full h-full">{children}</main>
