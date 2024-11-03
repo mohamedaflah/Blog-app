@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import HomUiCard from "@/components/pages-components/ui-card";
 import {
@@ -5,7 +6,6 @@ import {
   DownArrow,
   GrayHeart,
   GrayShare,
-  HospitalImage,
 } from "@/constants/assets";
 import { useGetBlogById } from "@/hooks/useGetOneBlogById";
 import { cn } from "@/lib/utils";
@@ -51,18 +51,13 @@ export default function BlogDetailPage() {
                 <p className="text-[#98989A]">{blogDetail?.description}</p>
               </div>
             </div>
-            {blogDetail?.contents?.map((item,i) => (
+            {blogDetail?.contents?.map((item, i) => (
               <div key={i} className="flex flex-col gap-3 py-12 lg:pr-9">
                 <div className="w-full">
-                  <h4 className="font-kubsans-medium text-2xl">
-                    {item.title}
-                  </h4>
+                  <h4 className="font-kubsans-medium text-2xl">{item.title}</h4>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="text-[#98989A]">
-                  {item.description}
-                  </p>
-                
+                  <p className="text-[#98989A]">{item.description}</p>
                 </div>
               </div>
             ))}

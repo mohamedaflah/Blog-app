@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { axiosInstance } from "@/api/api.config";
 import {
@@ -147,7 +148,9 @@ export default function MyAccount() {
                             <AlertDialogFooter>
                               <AlertDialogCancel>Cancel</AlertDialogCancel>
                               <AlertDialogAction
-                                onClick={() => handleDeleteBlog(blog?._id!)}
+                                onClick={() =>
+                                  handleDeleteBlog(String(blog?._id))
+                                }
                               >
                                 Continue
                               </AlertDialogAction>

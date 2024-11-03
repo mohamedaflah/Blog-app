@@ -1,10 +1,10 @@
 import { LogoImage } from "@/constants/assets";
-import { BookUser, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
 
-export default function AdminLayout({children}:PropsWithChildren) {
+export default function AdminLayout({ children }: PropsWithChildren) {
   return (
     <main className="h-screen w-full relative">
       <div className="w-full h-full flex ">

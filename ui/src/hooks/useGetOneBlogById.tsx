@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { axiosInstance } from "@/api/api.config";
 import { IBlogPost } from "@/types";
 import { useQuery } from "@tanstack/react-query";

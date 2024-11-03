@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // /get-blogbyid/:id
 "use client";
 import { axiosInstance } from "@/api/api.config";
@@ -28,7 +30,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { string, z } from "zod";
+import {  z } from "zod";
 
 export default function EditBlog() {
   const { id } = useParams<{ id: string }>();

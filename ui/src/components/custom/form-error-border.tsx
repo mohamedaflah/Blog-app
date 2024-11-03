@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { PropsWithChildren, ReactNode } from "react";
-import { FieldErrors } from "react-hook-form";
-type ErrorMap = FieldErrors;
+// import { FieldErrors } from "react-hook-form";
+// type ErrorMap = FieldErrors;
 export default function FormErrorBorder({
   children,
   error,

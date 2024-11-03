@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { axiosInstance } from "@/api/api.config";
 import FormErrorBorder from "@/components/custom/form-error-border";
@@ -26,7 +28,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { string, z } from "zod";
+import {  z } from "zod";
 
 export default function CreateBlogPost() {
   const [loading, setLoading] = useState(false);

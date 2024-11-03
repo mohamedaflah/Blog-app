@@ -10,14 +10,5 @@
 -> npm install
 -> setup .env based .env.local
 -> npm run dev
-<!--
 
-# Home page
 
-[![Home page](/media/realestate.png)]()
-
-# User or Seller Property add
-
-[![Add new column](/media/image.png)]()
-
-# more pages available -->
