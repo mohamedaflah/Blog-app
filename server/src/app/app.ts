@@ -10,14 +10,14 @@ import blogRoute from "../routes/blog.route";
 const app: Application = express();
 
 app.use(express.json());
+
+app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN,
+    origin: [process.env.CLIENT_ORIGIN!],
     credentials: true,
   })
 );
-
-app.use(cookieParser());
 
 app.use(`/api/user`, userRouter);
 app.use(`/api/blogs`, blogRoute);
