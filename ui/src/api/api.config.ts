@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_CLIENT_ORIGIN,
+  baseURL: "blog-app-production-742a.up.railway.app/api",
   withCredentials: true,
 });
 export { axiosInstance };
