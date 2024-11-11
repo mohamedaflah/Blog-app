@@ -1,22 +1,26 @@
-import { ArrowTopRightIcon, GrayHeart, GrayShare, WindMill } from "@/constants/assets";
+/* eslint-disable @next/next/no-img-element */
+import { ArrowTopRightIcon, GrayHeart, GrayShare } from "@/constants/assets";
+import { IBlogPost } from "@/types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-export default function HomUiCard() {
+export default function HomUiCard({ blog }: { blog: IBlogPost }) {
+  const router = useRouter();
   return (
     <div className="w-full min-h-80 rounded-[12px]  flex flex-col">
       <div className="w-full   h-52">
-        <Image
+        <img
           className="w-full h-full object-cover rounded-[12px]"
           alt=""
-          src={WindMill}
+          src={blog?.thumbnailImage}
         />
       </div>
       <div className="flex-1 pt-4 flex flex-col gap-5 justify-between">
         <div>
-          <h4>A Decisive Victory for Progressive Policies</h4>
+          <h4>{blog?.title}</h4>
         </div>
         <div>
-          <h4 className="text-[#98989A]">Politics</h4>
+          <h4 className="text-[#98989A]">{blog?.subTitle}</h4>
         </div>
         <div className="w-full flex justify-between items-center">
           <div className="flex gap-2">
@@ -30,7 +34,10 @@ export default function HomUiCard() {
             </button>
           </div>
           <div className="">
-            <button className="px-7 w-full h-14 rounded-[10px] border border-borderColor gap-5 flex-center ">
+            <button
+              onClick={() => router.push(`/blog/${blog?._id}`)}
+              className="px-7 w-full h-14 rounded-[10px] border border-borderColor gap-5 flex-center "
+            >
               <span className="text-[#98989A]">Read more</span>
               <Image
                 src={ArrowTopRightIcon}

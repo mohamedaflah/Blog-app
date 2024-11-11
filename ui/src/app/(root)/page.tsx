@@ -10,15 +10,18 @@ import {
   GrayShare,
   Latest,
   LightFlash,
-  Thought,
 } from "@/constants/assets";
 import useGetAllBlogsUserSide from "@/hooks/useGetAllBlogsUserSide";
+import { splitArrayIntoChunks } from "@/lib/utils";
+import { IBlogPost } from "@/types";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { data: blogs } = useGetAllBlogsUserSide();
+  const router = useRouter();
   return (
     <main className="w-full">
       <section className="w-full min-h-[600px] border border-borderColor grid grid-cols-1 md:grid-cols-10">
@@ -269,24 +272,21 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="w-full md:py-10  border-y mt-5 border-t-0 md:border-t-0">
-        <div className="container-width">
-          <div className="w-full h-full grid grid-cols-1  lg:grid-cols-3 gap-8">
-            <HomUiCard />
-            <HomUiCard />
-            <HomUiCard />
+      {splitArrayIntoChunks<IBlogPost>(blogs ?? [], 3).map((subBlos, I) => (
+        <section
+          key={I}
+          className="w-full md:py-10  border-y mt-5 border-t-0 md:border-t-0"
+        >
+          <div className="container-width">
+            <div className="w-full h-full grid grid-cols-1  lg:grid-cols-3 gap-8">
+              {subBlos[0] && <HomUiCard blog={subBlos[0]} />}
+              {subBlos[1] && <HomUiCard blog={subBlos[1]} />}
+              {subBlos[2] && <HomUiCard blog={subBlos[2]} />}
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="w-full md:py-10   border-y mt-5 border-t-0 md:border-t-0 border-b-0">
-        <div className="container-width">
-          <div className="w-full h-full grid grid-cols-1  lg:grid-cols-3 gap-8">
-            <HomUiCard />
-            <HomUiCard />
-            <HomUiCard />
-          </div>
-        </div>
-      </section>
+        </section>
+      ))}
+
       <section className="w-full bg-cardBackground md:py-16 py-4 mt-5 md:mt-0">
         <div className="container-width flex justify-between items-center md:flex-row flex-col">
           <div className="flex flex-col gap-4 items-start">
@@ -312,86 +312,56 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="w-full   mt-5 md:mt-0 border-b">
-        <div className="container-width grid gird-col-1 md:grid-cols-2 ">
-          <div className="min-h-96 w-full md:border-r border-borderColor py-12 flex items-center md:items-start flex-col border-b md:border-b-0">
-            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image
-                className="w-full h-80 object-cover "
-                alt=""
-                src={Thought}
-              />
-            </div>
-            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">
-                Mars Exploration: Unveiling Alien Landscapes
-              </span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">
-                Embark on a journey through the Red {"Planet's"} breathtaking
-                landscapes and uncover the mysteries of Mars.
-              </p>
-            </div>
+      {splitArrayIntoChunks<IBlogPost>(blogs ?? [], 2)?.map((blg, I) => (
+        <section key={I} className="w-full   mt-5 md:mt-0 border-b">
+          <div className="container-width grid gird-col-1 md:grid-cols-2 ">
+            {blg[0] && (
+              <>
+                <div
+                  onClick={() => router.push(`/blog/${blg[0]._id}`)}
+                  className="min-h-96 cursor-pointer w-full md:border-r border-borderColor py-12 flex items-center md:items-start flex-col border-b md:border-b-0"
+                >
+                  <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
+                    <img
+                      className="w-full h-80 object-cover "
+                      alt=""
+                      src={blg[0]?.thumbnailImage}
+                    />
+                  </div>
+                  <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
+                    <span className="font-kubsans-medium">{blg[0]?.title}</span>
+                    <p className="text-sm text-[#98989A] font-kubsans-thin line-clamp-2">
+                      {blg[0]?.description}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+            {blg[1] && (
+              <>
+                <div
+                  onClick={() => router.push(`/blog/${blg[1]._id}`)}
+                  className="min-h-96 cursor-pointer w-full  py-12 flex items-center md:items-end flex-col md:border-b-0"
+                >
+                  <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
+                    <img
+                      className="w-full h-80 object-cover "
+                      alt=""
+                      src={blg[1]?.thumbnailImage}
+                    />
+                  </div>
+                  <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
+                    <span className="font-kubsans-medium">{blg[1]?.title}</span>
+                    <p className="text-sm text-[#98989A] font-kubsans-thin line-clamp-2">
+                      {blg[1]?.description}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-          <div className="min-h-96 w-full  py-12 flex items-center md:items-end flex-col md:border-b-0">
-            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image
-                className="w-full h-80 object-cover "
-                alt=""
-                src={Thought}
-              />
-            </div>
-            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">
-                Mars Exploration: Unveiling Alien Landscapes
-              </span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">
-                Embark on a journey through the Red {"Planet's"} breathtaking
-                landscapes and uncover the mysteries of Mars.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="w-full   mt-5 md:mt-0 border-b">
-        <div className="container-width grid gird-col-1 md:grid-cols-2 ">
-          <div className="min-h-96 w-full md:border-r border-borderColor border-b md:border-b-0 py-12 flex items-center md:items-start flex-col">
-            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image
-                className="w-full h-80 object-cover "
-                alt=""
-                src={Thought}
-              />
-            </div>
-            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">
-                Mars Exploration: Unveiling Alien Landscapes
-              </span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">
-                Embark on a journey through the Red {"Planet's"} breathtaking
-                landscapes and uncover the mysteries of Mars.
-              </p>
-            </div>
-          </div>
-          <div className="min-h-96 w-full  py-12 flex items-center md:items-end flex-col ">
-            <div className="md:w-[90%]  h-80 rounded-[10px] border overflow-hidden">
-              <Image
-                className="w-full h-80 object-cover "
-                alt=""
-                src={Thought}
-              />
-            </div>
-            <div className="mt-4 flex flex-col gap-3 md:w-[90%]">
-              <span className="font-kubsans-medium">
-                Mars Exploration: Unveiling Alien Landscapes
-              </span>
-              <p className="text-sm text-[#98989A] font-kubsans-thin">
-                Embark on a journey through the Red {"Planet's"} breathtaking
-                landscapes and uncover the mysteries of Mars.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      ))}
     </main>
   );
 }

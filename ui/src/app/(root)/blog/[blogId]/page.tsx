@@ -7,14 +7,17 @@ import {
   GrayHeart,
   GrayShare,
 } from "@/constants/assets";
+import useGetAllBlogsUserSide from "@/hooks/useGetAllBlogsUserSide";
 import { useGetBlogById } from "@/hooks/useGetOneBlogById";
 import { cn } from "@/lib/utils";
+
 import { format } from "date-fns";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
 export default function BlogDetailPage() {
+  const { data: blogs } = useGetAllBlogsUserSide();
   const [viewAll, setViewAll] = useState<boolean>(false);
   const { blogId } = useParams<{ blogId: string }>();
   const { data: blogDetail } = useGetBlogById(blogId!);
@@ -57,7 +60,7 @@ export default function BlogDetailPage() {
                   <h4 className="font-kubsans-medium text-2xl">{item.title}</h4>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="text-[#98989A]">{item.description}</p>
+                  <p className="text-[#98989A]">{item?.description}</p>
                 </div>
               </div>
             ))}
@@ -171,9 +174,14 @@ export default function BlogDetailPage() {
             </button>
           </div>
           <div className="md:mt-12 mt-7 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <HomUiCard />
-            <HomUiCard />
-            <HomUiCard />
+            {blogs?.map(
+              (blog, I) =>
+                blog._id !== blogId && (
+                  <HomUiCard key={I + String(blog?._id)} blog={blog} />
+                )
+            )}
+            {/* <HomUiCard />
+            <HomUiCard /> */}
           </div>
         </div>
       </section>
