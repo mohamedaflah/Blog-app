@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install --legacy-peer-deps
 
+
+RUN npm i typescript --save-dev
+
 # Copy the rest of the application code
 COPY . .
 
