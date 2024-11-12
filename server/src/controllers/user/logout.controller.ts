@@ -6,10 +6,12 @@ export const userLogoutController = async (
   next: NextFunction
 ) => {
   try {
-    res.clearCookie(process.env?.TOKEN_COOKIE_LABEL!);
-    res
-      .status(200)
-      .json({ status: true, message: "Successfull", user: null });
+    res.clearCookie(process.env?.TOKEN_COOKIE_LABEL!, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS in production
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    });
+    res.status(200).json({ status: true, message: "Successfull", user: null });
   } catch (error) {
     next(error);
   }
