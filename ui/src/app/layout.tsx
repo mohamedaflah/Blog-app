@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/favicons/favicon-16x16.png" />
+      <link rel="icon" href="/favicons/android-chrome-512x512.png" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${kubSansThin.variable} ${kubSansRegular.variable} ${kubSansMedium.variable} ${kubSansBold.variable} antialiased`}
       >
