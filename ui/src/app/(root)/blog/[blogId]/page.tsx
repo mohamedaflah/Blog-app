@@ -51,7 +51,7 @@ export default function BlogDetailPage() {
                 <h4 className="font-kubsans-medium text-lg">Introduction</h4>
               </div>
               <div>
-                <p className="text-[#98989A]">{blogDetail?.description}</p>
+                <p className="text-[#98989A] break-all break-words">{blogDetail?.description}</p>
               </div>
             </div>
             {blogDetail?.contents?.map((item, i) => (
@@ -60,7 +60,7 @@ export default function BlogDetailPage() {
                   <h4 className="font-kubsans-medium text-2xl">{item.title}</h4>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="text-[#98989A]">{item?.description}</p>
+                  <p className="text-[#98989A] break-all break-words">{item?.description}</p>
                 </div>
               </div>
             ))}
