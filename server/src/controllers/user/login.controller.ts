@@ -45,7 +45,7 @@ export const userLoginController = async (
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS in production
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      domain: process.env.CLIENT_ORIGIN!,
+      // domain: process.env.CLIENT_ORIGIN!,
     });
     res
       .status(200)
