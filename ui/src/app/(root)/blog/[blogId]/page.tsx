@@ -142,6 +142,27 @@ export default function BlogDetailPage() {
                   </ul>
                 </div>
               </div>
+              <div className="lg:mt-2 mt-1 xl:pl-12 pl-0 ">
+                <div className="w-full">
+                  <span className="text-[#98989A] font-kubsans-thin">
+                    Gallery
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-3">
+                  {blogDetail?.subImages?.map((url, i) => (
+                    <div
+                      key={url + i}
+                      className="w-full h-56 bg-cardBackground rounded-[10px] p-2 border"
+                    >
+                      <img
+                        src={url}
+                        alt=""
+                        className="w-full rounded-[5px] h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
