@@ -11,10 +11,9 @@ export const userLoginController = async (
 ) => {
   try {
     const { email, password } = req.body;
-   
-    
+
     const userExist = await User.findOne({ email: email });
-  
+
     if (!userExist) {
       res.status(404).json({
         status: false,
@@ -30,15 +29,24 @@ export const userLoginController = async (
       });
       return;
     }
-    const token =await generateJWT({ id: userExist?._id, role: userExist?.role });
-    console.log("🚀 ~ token:", token)
+    const token = await generateJWT({
+      id: userExist?._id,
+      role: userExist?.role,
+    });
+    console.log("🚀 ~ token:", token);
+    // res.cookie(process.env?.TOKEN_COOKIE_LABEL!, token, {
+    //   maxAge: 22 * 24 * 60 * 60 * 1000,
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS in production
+    //   sameSite: "lax", // Lax is usually safe for auth cookies
+    // });
     res.cookie(process.env?.TOKEN_COOKIE_LABEL!, token, {
       maxAge: 22 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS in production
-      sameSite: "lax", // Lax is usually safe for auth cookies
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      domain: process.env.CLIENT_ORIGIN!,
     });
-
     res
       .status(200)
       .json({ status: true, message: "Successfull", user: userExist });

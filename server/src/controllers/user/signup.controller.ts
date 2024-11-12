@@ -26,12 +26,13 @@ export const userSignupController = async (
       designation,
     });
     await user.save();
-    const token =await generateJWT({ id: user?._id, role: role });
+    const token = await generateJWT({ id: user?._id, role: role });
     res.cookie(process.env?.TOKEN_COOKIE_LABEL!, token, {
       maxAge: 22 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Only send cookie over HTTPS in production
-      sameSite: "lax", // Lax is usually safe for auth cookies
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      domain: process.env.CLIENT_ORIGIN!,
     });
     res.status(201).json({ status: true, message: "Successfull", user });
   } catch (error) {
