@@ -23,7 +23,8 @@ export default function RectQueryWrapper({ children }: PropsWithChildren) {
         localStorage.setItem("user", JSON.stringify(data?.user));
       })
       .catch((er: AxiosError) => {
-        toast.error(er.message);
+        // toast.error(er.message);
+        console.log(er);
       })
       .finally(() => setLoading(false));
   }, [setUser]);
